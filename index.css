@@ -13,6 +13,7 @@ body{overflow-x: hidden;}
     margin: 0 auto;
     
 }
+.nav-item{margin-left: 10px}
 
 #top-nav{display: flex; margin-bottom: 0;}
 #top-nav li{list-style-type: none;}

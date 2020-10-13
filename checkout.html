@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" 
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="main">
+      <div class="icon">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+      </div>
+      <div class="row">
+          <div class="col-md-6 right-screen">
+              <div>
+                <span>
+                  <ul id="reel">
+                      <a href="cart.html"><li>Manage Cart</li></a>
+                      <a href=""><li>Billing and Delivery Address</li></a>
+                      <a href="success.html"><li>Checkout</li></a>
+                  </ul>
+                </span> 
+              </div>
+          </div>
+          <div class="col-md-6 form-container">
+            <form  method="POST" class="w-85">
+                <div class="text-center mb-5">
+                    <h3>Please provide the preferred <br> delivery address and cardd details</h3>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity"required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control" requited>
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" required>
+                  </div>
+                </div>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="nameOnCard">CARD HOLDER'S NAME</label>
+                      <input type="text" class="form-control" id="nameOnCard" placeholder="Enter name on card" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="date">CARD EXPIRY DATE</label>
+                      <input type="month" class="form-control" id="date" placeholder="date" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-9">
+                      <label for="number">CARD NUMBER</label>
+                      <input type="number" class="form-control" id="number" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputCvv">CVV</label>
+                      <input type="number" class="form-control" id="inputCvv" required>
+                    </div>
+                  </div>
+                  
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                    <label class="form-check-label" for="gridCheck" required>
+                      Check me out
+                    </label>
+                  </div>
+                </div>
+                <a href="success.html"><button type="button" class="btn btn-primary">Pay Now</button></a>
+              </form>
+          </div>
+      </div>
+    </main>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+    </body>
+    </html>
+   

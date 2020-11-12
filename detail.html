@@ -56,6 +56,7 @@
     <main class="container mt-4">
        <div class="row">
            <div class="col-md-5" id="details-right">
+             <!-- <div>
               <div class="items1">
                   <p>Italian Loafers</p>
               </div>
@@ -66,15 +67,15 @@
                     minima sed pariatur officia quas iure! Inventore, expedita vero autem est ducimus asperiores ea?</p>
               </div>
               <div class="items">
-                    <p>Avai. colours:</p>
-                    <p><span style="color: red;">Red</span>, <span style="color: blue;">Blue</span>, <span style="color: orange;">Orange</span></p>
+                    <p>Product Category:</p>
+                    <p> </p>
               </div>
               <div class="items">
                   <p>Price:</p>
                   <p>&#8358; 8000</p>
               </div>
               <div class="items">
-                    <p>Shipping cost:</p>
+                    <p>Discount:</p>
                     <p>&#8358; 2</p>
               </div>
               <hr>
@@ -82,13 +83,17 @@
                     <p>Total cost:</p>
                     <p>&#8358; 8002</p>
               </div>
+            </div> -->
+            <br><br>
               <div class="add-cart">
-                    <a href="cart.html"><button type="button" class="btn btn-lg btn-primary"><i class="fas fa-cart-plus"></i> Add To Cart</button></a>
+                <a href="index.html"><button type="button" class="btn btn-md btn-secondary"><i class="fas fa-arrow-left"></i> Back To Shop</button></a>
+                <button type="button" class="btn btn-md btn-primary" onclick="AddToCart()"><i class="fas fa-cart-plus"></i> Add To Cart</button>
               </div>
+            
            </div>
            <div class="col-md-7">
              <div id="detail-img">
-                <img src="https://images.unsplash.com/photo-1599214486600-ce1f6ebec148?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="detail">
+                <img id="detail-imgg"  alt="detail">
              </div>
              <div id="detail-review" class="mt-5">
                <h1>Reviews</h1>
@@ -142,6 +147,10 @@
            </div>
        </div>
     </main>
+    <div class="cartt">
+      <h4 class="text-top" id="numCart">0</h4>
+      <a href="cart.html"><i class="fas fa-cart-plus"></i></a>
+  </div>
 
     <!-- Footer -->
     <footer class="page-footer font-small blue pt-4">
@@ -232,12 +241,124 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+            function AddToCart(){
+                var text = window.location.hash.substring(1)
+                var index = Number(text)
+                let products;
+                if(localStorage.getItem('products') === null){
+                   return  products = [];
+                }else{
+                    products = JSON.parse(localStorage.getItem("products"));
+                }
+                cartInLocalStorage(products[index])
+                location.reload()
+            }
+
+              function cartInLocalStorage(cart){
+                      let carts;
+                      if(localStorage.getItem('carts') === null){
+                          carts = [];
+                      }else{
+                          carts = JSON.parse(localStorage.getItem("carts"));
+                      }
+                      carts.push(cart);
+                      localStorage.setItem("carts", JSON.stringify(carts));
+                  }
+
+              function returnCartInLocalStorage(){
+                      let carts;
+                      if(localStorage.getItem('carts') === null){
+                          carts = [];
+                      }else{
+                          carts = JSON.parse(localStorage.getItem("carts"));
+                      }
+                      document.getElementById("numCart").innerText = carts.length;
+                      // carts.push(cart);
+                      // localStorage.setItem("carts", JSON.stringify(carts));
+                  }
+               returnCartInLocalStorage()
+
+             function returnProducts(){
+                var text = window.location.hash.substring(1)
+                var index = Number(text)
+                let products;
+                if(localStorage.getItem('products') === null){
+                   return  products = [];
+                }else{
+                    products = JSON.parse(localStorage.getItem("products"));
+                }
+                    var documentFragment = document.createDocumentFragment()
+                    var div0 = document.createElement('div')
+                    documentFragment.appendChild(div0)
+                    var div1 = document.createElement('div')
+                        div1.setAttribute("class", "items1");
+                    var p1  = document.createElement("p")
+                        p1.innerText = products[index].name
+                        div1.appendChild(p1)
+
+                    var div2 = document.createElement('div')   
+                        div2.setAttribute("id", "desc");
+                    var p2  = document.createElement("p")
+                    var p22 = document.createElement("p")
+                        p2.innerText = "Description:"
+                        p22.innerText = products[index].desc
+                        div2.appendChild(p2)
+                        div2.appendChild(p22)
+
+                    var div3 = document.createElement('div')
+                        div3.setAttribute("class", "items");
+                    var p3  = document.createElement("p")
+                    var p32 = document.createElement("p")
+                        p3.innerText = "Product Category:"
+                        p32.innerText = products[index].category
+                        div3.appendChild(p3)
+                        div3.appendChild(p32)
+
+                    var div4 = document.createElement('div')
+                        div4.setAttribute("class", "items");
+                    var p4  = document.createElement("p")
+                    var p42 = document.createElement("p")
+                        p4.innerText = "Price:"
+                        p42.innerText = products[index].price
+                        div4.appendChild(p4)
+                        div4.appendChild(p42)
+
+                    var div5 = document.createElement('div')
+                        div5.setAttribute("class", "items");
+                    var p5  = document.createElement("p")
+                    var p52 = document.createElement("p")
+                        p5.innerText = "Discount:"
+                        p52.innerText = products[index].discount
+                        div5.appendChild(p5)
+                        div5.appendChild(p52)
+
+                    var div6 = document.createElement('div')
+                        div6.setAttribute("class", "items2");
+                    var p6  = document.createElement("p")
+                    var p62 = document.createElement("p")
+                        p6.innerText = "Total Cost:"
+                        if(products[index].discount == "Null"){
+                          p62.innerText = products[index].price
+                        }else{
+                          p62.innerText = products[index].price - products[index].discount
+                        }
+                        
+                        div6.appendChild(p6)
+                        div6.appendChild(p62)
+                    div0.appendChild(div1)
+                    div0.appendChild(div2)
+                    div0.appendChild(div3)
+                    div0.appendChild(div4)
+                    div0.appendChild(div5)
+                    div0.appendChild(div6)
+                eElement = document.getElementById("details-right")
+                eElement.insertBefore(documentFragment, eElement.firstChild )
+                document.getElementById("detail-imgg").setAttribute("src", products[index].img)
+                
+            }
+            returnProducts()
+        </script>
     </body>
     </html>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
-</body>
-</html>

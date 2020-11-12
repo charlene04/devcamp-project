@@ -13,9 +13,9 @@
 </head>
 <body>
     <main class="main">
-      <div class="icon">
+      <!-- <div class="icon">
         <a href="index.html"><i class="fas fa-home"></i></a>
-      </div>
+      </div> -->
       <div class="row">
           <div class="col-md-6 right-screen">
               <div>
@@ -38,7 +38,8 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Submit</button><br>
+              <p class="text-center" id="response"></p>
             </form>
           </div>
       </div>
@@ -46,7 +47,44 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+          $( "form" ).on( "submit", function(e) {
+            var email = $('#exampleInputEmail1').val()
+            var pass = $('#exampleInputPassword1').val()
+            let user = {'email':email, 'password':pass}
+            checkInLocalStorage(user)
+            e.preventDefault();
+          });
+          
+          function checkInLocalStorage(user){
+              let users;
+              if(localStorage.getItem('users') === null){
+                  // users = [];
+                  $('#response').text("Such user account does not exist")
+                  return;
+              }else{
+                  users = JSON.parse(localStorage.getItem("users"));
+              }
+
+              if(user.email == "charlesugbana04@gmail.com" && user.password == "charlene0004" ){
+                var loc = window.location.pathname
+                 return window.location.href= loc.substring(0, loc.lastIndexOf('/')) + "/admin.html";
+              }
+              let truthy = []
+              users.forEach(function(user1){
+                  if(user1.email = user.email && user1.password == user.password ){
+                    truthy.push('true')
+                  }
+              })
+              if(truthy.length != 0){
+                  var loc = window.location.pathname
+                  window.location.href= loc.substring(0, loc.lastIndexOf('/')) + "/index.html";
+              }else{
+                $('#response').text("Such user account does not exist")
+              }
+          }
+      </script>
     </body>
     </html>
    

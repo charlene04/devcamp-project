@@ -21,34 +21,50 @@
               <div>
                 <span>
                   <ul id="reel">
-                      <a href="cart.html"><li>Manage Cart</li></a>
-                      <a href=""><li>Billing and Delivery Address</li></a>
-                      <a href="success.html"><li>Checkout</li></a>
+                    <a href="cart.html"><li>Manage Cart</li></a>
+                    <a href="checkout.html"><li>Billing and Delivery Address</li></a>
+                    <a href="summary.html"><li>Checkout</li></a>
                   </ul>
                 </span> 
               </div>
           </div>
           <div class="col-md-6 form-container">
-            <form action="" method="POST" id="cart-form">
+            <form id="cart-form">
                 <div id="cart-icon" class="text-center">
                     <i class="fas fa-cart-plus"></i>
                 </div>
-              <div class="form-group">
-                <label for="product">Product</label>
-                <input type="text" class="form-control" id="product" value="Italian Loafers" disabled>
-              </div>
-              <label for="color">Colour</label><br>
-              <select name="color" id="color" name="color">
-                  <option value="1">Red</option>
-                  <option value="2">Blue</option>
-                  <option value="3">Orange</option>
-              </select>
+                <div class="form-row">
+                  <div class="col">
+                    <label >Product name</label>
+                  </div>
+                  <div class="col">
+                    <label>Unit Price (&#8358;)</label>
+                  </div>
+                  <div class="col">
+                    <label for="product">Quantity Needed</label>
+                  </div>
+                </div>
+                <div id="cart-items">
+                  <!-- <div class="form-row">
+                    <div class="col">
+                      <label for="product">Product name</label>
+                      <input type="text" class="form-control" id="product" value="Italian Loafers" disabled>
+                    </div>
+                    <div class="col">
+                      <label for="product">Product Unit Price</label>
+                      <input type="text" class="form-control" id="product" value="Italian Loafers" disabled>
+                    </div>
+                    <div class="col">
+                      <label for="product">Quantity Needed</label>
+                      <input type="text" class="form-control" id="product" value="Italian Loafers" disabled>
+                    </div>
+                  </div> -->
+                </div>
+                <br><br>
+                <div class="text-center">
+                  <button type="button" class="btn btn-lg rounded-pill btn-primary" onclick="proceed()">Proceed To Checkout</button>
+                </div>
               
-              <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity of product">
-              </div>
-              <a href="checkout.html"><button type="button" class="btn btn-primary">Proceed To Checkout</button></a>
             </form>
           </div>
       </div>
@@ -56,7 +72,103 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+         
+
+              function returnCartInLocalStorage(){
+                      let carts;
+                      if(localStorage.getItem('carts') === null){
+                          return carts = [];
+                      }else{
+                          carts = JSON.parse(localStorage.getItem("carts"));
+                      }
+                      carts.forEach(function(cart, i){
+                    var documentFragment = document.createDocumentFragment()
+                    var div0 = document.createElement('div')
+                        div0.setAttribute("class", "form-row")
+                    documentFragment.appendChild(div0)
+                    var div1 = document.createElement('div')
+                        div1.setAttribute("class", "col");
+                    var input1 = document.createElement('input')
+                        input1.setAttribute("id", cart.name); 
+                        input1.setAttribute("class", "form-control");
+                        input1.setAttribute("value", cart.name);
+                        input1.setAttribute("type", cart.discount); 
+                        input1.disabled = true
+                        div1.appendChild(input1)
+
+
+                    var div2 = document.createElement('div')
+                        div2.setAttribute("class", "col");
+                    var input2 = document.createElement('input')
+                        input2.setAttribute("id", cart.price); 
+                        input2.setAttribute("class", "form-control");
+                        input2.setAttribute("value", cart.price);
+                        input2.setAttribute("type", "text");
+                        input2.disabled = true
+                        div2.appendChild(input2)
+
+                    var div3 = document.createElement('div')
+                        div3.setAttribute("class", "col");
+                    var input3 = document.createElement('input')
+                        input3.setAttribute("id", cart.desc); 
+                        input3.setAttribute("class", "form-control");
+                        input3.setAttribute("placeholder", "1");
+                        input3.setAttribute("type", "number"); 
+                        input3.setAttribute("min", "1")
+                        div3.appendChild(input3)
+            
+                       
+                        div0.appendChild(div1)
+                        div0.appendChild(div2)
+                        div0.appendChild(div3)
+
+                    document.getElementById("cart-items").appendChild(documentFragment)
+                      })
+                  }
+                  returnCartInLocalStorage()
+
+
+             // name, unit, cost, discount
+          
+             function checkoutInLocalStorage(evall){
+                      let checkouts;
+                      if(localStorage.getItem('checkouts') === null){
+                         checkouts = [];
+                      }else{
+                          checkouts = JSON.parse(localStorage.getItem("checkouts"));
+                      }
+                      evall.forEach(function(item){
+                        checkouts.push(item)
+                      })
+                      localStorage.setItem("checkouts", JSON.stringify(checkouts))
+              }
+
+          function proceed(){
+                var ancestor = document.getElementById('cart-items'),
+                  descendents = ancestor.getElementsByClassName('form-row'),
+                  eval = [];
+                for(var i = 0; i < descendents.length; i++){
+                  var name = descendents[i].childNodes[0].lastChild.value
+                  var price = descendents[i].childNodes[1].lastChild.value
+                  var unit = descendents[i].childNodes[2].lastChild.value
+                  var discount = descendents[i].childNodes[0].lastChild.getAttribute("type")
+                  if(unit == ''){
+                      unit = 1
+                  }
+                  if(discount == "Null"){
+                      discount = 0
+                  }
+                  var temp = {"name" : name, "unit": unit, "cost" : Number(price)* Number(unit), "discount": Number(discount)*Number(unit)}
+                  eval.push(temp)
+                }
+              checkoutInLocalStorage(eval);
+              var loc = window.location.pathname;
+                  window.location.href= loc.substring(0, loc.lastIndexOf('/')) + "/checkout.html";
+          }
+              
+        </script>
     </body>
     </html>
    

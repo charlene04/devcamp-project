@@ -13,9 +13,9 @@
 </head>
 <body>
     <main class="main">
-      <div class="icon">
+      <!-- <div class="icon">
         <a href="index.html"><i class="fas fa-home"></i></a>
-      </div>
+      </div> -->
       <div class="row">
           <div class="col-md-6 right-screen">
               <div>
@@ -26,7 +26,7 @@
               </div>
           </div>
           <div class="col-md-6 form-container">
-            <form action="" method="POST" id="signup-form">
+            <form action="#" id="signup-form">
               <div class="text-center user">
                 <i class="fas fa-user-circle"></i>
               </div>
@@ -44,7 +44,8 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
               </div>
-              <button type="submit" class="btn btn-primary">Register</button>
+              <button type="submit" class="btn btn-primary">Register</button><br>
+              <p class="text-center" id="response"></p>
             </form>
           </div>
       </div>
@@ -52,7 +53,29 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+            $( "form" ).on( "submit", function(e) {
+              var name = $('#exampleInputName').val()
+              var email = $('#exampleInputEmail1').val()
+              var pass = $('#exampleInputPassword1').val()
+              let user = {'name':name, 'email':email, 'password':pass}
+              storeInLocalStorage(user)
+              $('#response').text("Resgistration successful!")
+              e.preventDefault();
+            });
+
+            function storeInLocalStorage(user){
+                let users;
+                if(localStorage.getItem('users') === null){
+                    users = [];
+                }else{
+                    users = JSON.parse(localStorage.getItem("users"));
+                }
+                users.push(user);
+                localStorage.setItem("users", JSON.stringify(users));
+            }
+        </script>
     </body>
     </html>
    

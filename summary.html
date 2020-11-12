@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" 
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        .summary-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #payment{
+            color: red;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+      <div class="icon">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+      </div>
+      <div class="row">
+          <div class="col-md-6 right-screen">
+              <div>
+                <span>
+                  <ul id="reel">
+                      <a href="cart.html"><li>Manage Cart</li></a>
+                      <a href="checkout.html"><li>Billing and Delivery Address</li></a>
+                      <a href="summary.html"><li>Checkout</li></a>
+                  </ul>
+                </span> 
+              </div>
+          </div>
+          <div class="col-md-6 summary-container">
+              <h1>SHOPPING SUMMARY</h1>
+            <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead id="thead">
+                  <tr>
+                    <th class="th-sm">Product Name
+              
+                    </th>
+                    <th class="th-sm">Unit(s)
+              
+                    </th>
+                    <th class="th-sm">Total Cost (&#8358;)
+              
+                    </th>
+                    <th class="th-sm">Discount Value (&#8358;)
+              
+                    </th>
+                  </tr>
+                </thead> 
+                <tbody id="tbody">
+                 
+                </tbody>
+              </table>
+              <section>
+                <span class="items">
+                    <p>Total cost (&#8358;):</p>
+                    <p id="price"></p>
+                </span>
+                <span class="items">
+                      <p>Total discount (&#8358;):</p>
+                      <p id="discount"></p>
+                </span>
+                <hr>
+                <span class="items2">
+                      <p>Your card will be charged (&#8358;):</p>
+                      <p id="payment"></p>
+                </span>
+              </section>
+                <br>
+               
+                <button type="button" class="btn btn-lg rounded-pill btn-primary" onclick="done()">Checkout</button>
+                
+                
+              
+          </div>
+      </div>
+    </main>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- <script src="index.js"></script> -->
+        <script>
+            function returnCheckouts(){
+                let checkouts;
+                if(localStorage.getItem('checkouts') === null){
+                    return checkouts = [];
+                }else{
+                    checkouts = JSON.parse(localStorage.getItem("checkouts"));
+                }
+                var discount = 0
+                var payment;
+                var cost = 0
+                checkouts.forEach(function(checkout, i){
+                    var documentFragment = document.createDocumentFragment()
+                    var tr = document.createElement('tr')
+                    documentFragment.appendChild(tr)
+                    var td1 = document.createElement('td')
+                        td1.innerText = checkout.name ;
+                    var td2 = document.createElement('td')
+                        td2.innerText = checkout.unit ;    
+                    var td3 = document.createElement('td')
+                        td3.innerText = checkout.cost ;
+                    var td4 = document.createElement('td')
+                        td4.innerText = checkout.discount ;        
+    
+                    tr.appendChild(td1)
+                    tr.appendChild(td2)
+                    tr.appendChild(td3)
+                    tr.appendChild(td4)
+                    discount += Number(checkout.discount)
+                    cost += Number(checkout.cost)
+                    document.getElementById("tbody").appendChild(documentFragment)
+                })
+                document.getElementById("price").innerText = cost
+                document.getElementById("discount").innerText = discount
+                document.getElementById("payment").innerText = Number(cost) - Number(discount)
+            }
+            returnCheckouts()
+
+            function done(){
+                localStorage.removeItem("checkouts")
+                localStorage.removeItem("carts")
+                var loc = window.location.pathname;
+                  window.location.href= loc.substring(0, loc.lastIndexOf('/')) + "/success.html";
+            }
+        </script>
+    </body>
+    </html>
+   

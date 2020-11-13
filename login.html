@@ -60,9 +60,9 @@
           function checkInLocalStorage(user){
               let users;
               if(localStorage.getItem('users') === null){
-                  // users = [];
-                  $('#response').text("Such user account does not exist")
-                  return;
+                  users = [];
+        
+
               }else{
                   users = JSON.parse(localStorage.getItem("users"));
               }
